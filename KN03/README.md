@@ -87,6 +87,12 @@ foreach ($container in $containers) {
 - Container innerhalb desselben Netzwerks können direkt miteinander kommunizieren.
 - Container in separaten Netzwerken sind voneinander isoliert und benötigen eine Brücke oder manuelle Netzwerkverbindung, um miteinander zu kommunizieren.
 
+
+**Fazit**
+```
+busybox 2,3: standartnetz bridge bekommt automatisch keine IP, weshalb nur per IP gepingt werden kann und nicht über busybox
+busybox 1,4: definierte tbz netz bekommt automatisch eine IP, weshalb per IP und busybox gepingt werden kann.busybox
+```
 ---
 
 ## **4. Vergleich mit KN02 (Web- und DB-Container)**
