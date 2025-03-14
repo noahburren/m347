@@ -1,0 +1,41 @@
+version: '3.8'
+
+networks:
+  m347-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+          ip_range: 172.30.5.0/24
+          gateway: 172.30.5.254
+
+services:
+  db:
+    container_name: m347-kn04a-db
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    networks:
+      m347-network:
+        ipv4_address: 172.30.5.10
+
+  web:
+    container_name: m347-kn04a-web
+    image: noahburren07/kn04-web:latest  # Hier dein eigenes Image eintragen
+    restart: always
+    ports:
+      - "8080:80"
+    networks:
+      m347-network:
+        ipv4_address: 172.30.5.20
+    depends_on:
+      - db
+    environment:
+      DB_HOST: m347-kn04a-db
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: mydatabase
