@@ -37,3 +37,11 @@ Typischerweise würde man eine Fehlermeldung wie Connection refused oder Access 
 - oder der Hostname im Netzwerk nicht erreichbar ist.
 Um das generell zu vermeiden, könnte man in db.php einen Retry-Mechanismus einbauen, der die Verbindung mehrfach versucht.
 Kurz danach funktioniert die Verbindung aber.
+
+# B
+
+#### Info
+![infooo.php](infooo.png)
+
+#### DB
+![dbb.php](dbb.png)

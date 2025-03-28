@@ -1,0 +1,131 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUBo+qnNu5xxM9vfz4C04M36FHxHNrEMdm5TkFj1/SfVtqunlUOeMpu7nFCZZKnX8HYwf/MkjcBiTYAgncxku8grwl6XuW/pcvmb6/ghSIaw4xtRRSzit7omqJ5d8kXB3+Nd1aaMHsjfly4nkaqswhySVXQqr8Hw6DbWVw8jLLVKEE+5NZHY33hJkhJwK4blCllsGpmQaKi1qxjsN0hZOWNK01iJAydwD8t2xJ0NOYbq8Qas5IyPnRN7SPxvEhIP6WLQ6Ym6Dmf8FwNW1cHLTKabgjzt5f/HKUkKS89dPd3fn4nnFli1BOMECGUIvVlOw2pQNri7+04OOfn2FGlqr5 teacher
+      - ssh-rsa MIIEpAIBAAKCAQEA8ff3sswERpURe4Ib61w4N4L8U4zB6lWBiomHoavB+a6XbRI/jaR4xxcbKq7dknt1Vulinmj+y76Sf4DDRKWqy01sGRQeEP2NQ1OtdArZA/WXrGQFyJFcougo/YsUZ21KsioT5fJOWfn68OJs3QRsk5aXAkJAURmkkf7sU3ahMoXFKz6025bheMVLmH0D+LI2mTwGQgf+W6qL+KZlv6MyPJtQjtuY2Y1bSd6KT8+sKqC2WPrl/mrISDarHsWZ0SYZGaBVOdY+r2cLkCzBtBKk0UAc49ZW113rSHu8nwCk8iMxNQ6GCyrKkKdCmtLw3j/2qfYBSPQRebyf0ky+9f0fhwIDAQABAoIBABW9MYPe0IOG4Qs3pUp//oz+N61J+CIVjI3lzUm5JLRJ+1DRUuRm4nMAoHA1RbLjZKdqUHHq/PlRJdhOuTxxpeaeDhgytoDQRuDFo8/JKbYxWm8ijWJ3rNr2ALjGxg6EwzE+losSOffbfbAmp6EzxI19+hM54I1owGBdht34yoK/VT7R3cRP5vLRClJKHkWGMejLhMzTpcSVuUHY2pLScSbh58uSsybHx5CdlngKz2XpGiBhwdUHWqpmSKuiXKF6IPbyvFxqe8GepGutTMSk6SpUzKSZLApZA2O7gKnknzIQrn6Vyyhcnk0A8AOQCRosUU0ODPhRdNpJS/h0U5uQqAECgYEA+QYscaSAuqdy44TZ6j/xt05IpRbxYVomGvYHTH8SiV2xQo2tjpxTJbzHYtWyQZuwv5m4L6lTo2dpoQt1y22l1NInRXLI+Dkf8mCYuYSYR0RWjxUcE1QJRbJ48WdRzna78kB2tjs2MRqJ6UNiI/ADLqL5rhZgGF/lZSPwnKa3y+MCgYEA+L8yaTUZ1gD5fM0u5vRiQtCgs5aMENJotYz26AyFWz96HLkSRPUZleG8aVG2It/1hwfJko8gM2kbg7suDjjFucwue6P4vvqx91iMAzs7KASnKeuxMUXkvsVdCZd0AgRzvkqq3c453//jCzucxYe9rH1GUuuwnifVkN2mvXHeNw0CgYEAjbkXvi1zHceCuT24j3qI5FvnOB2Qjmkx2pI+oSiIsijiYxAiwFDzeTyw9OzNoE0tED459tYVRZ/rG75b8cSbZj2cIAgtnCdWqSiUgrCVwamA4bmP2uguxr3F2w2EH06vtDU/2oJkWxnRdzHkPrOv+/DAzHTrh7O76A3GOEEhxSUCgYEAzcv53Bsntet2fi+Px1qXVSogWpSKa3x5TwNCX7fEOTsqP0tK9yxFL8DkTcphwzbBfycNOSka/g3Oysz5DKEhzVdFeduud+sXhEmJBT9i8PfwiXlLTzXBS6gkEkRwoR6n198UwI/XSCD/6hI24SIt5eB7Zy1CIYdZZRJM2l2z+J0CgYBZoeyy+FegpIVTr12ti4bjwmnH0u6hgWP4C0eLnOJMAJbprYIo70uPO+CNTvGPhfglJjBP6cmVBTz+ybZ2edFxw2/aFylq6coLYVH4nHUpULaWE8oXIc8F5XrSSRLTFXT1GeY5pdUu39Dd9IFafmFDIkLIH7FioUjFhdhq+SyMxw== personal-key
+
+ssh_pwauth: false
+disable_root: false
+package_update: true
+package_upgrade: true
+
+groups:
+  - docker
+
+system_info:
+  default_user:
+    groups: [docker]
+
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  - unattended-upgrades
+
+final_message: "The system is finally up, after $UPTIME seconds"
+
+write_files:
+  - path: /home/ubuntu/info.php
+    content: |
+      <?php
+      phpinfo();
+      ?>
+
+  - path: /home/ubuntu/db.php
+    content: |
+      <?php
+      $host = 'm347-kn04a-db';
+      $user = 'user';
+      $password = 'password';
+      $dbname = 'mydatabase';
+
+      $conn = new mysqli($host, $user, $password, $dbname);
+
+      if ($conn->connect_error) {
+          die("Verbindung fehlgeschlagen: " . $conn->connect_error);
+      }
+
+      // Query to show MySQL users
+      $sql = "SELECT Host, User FROM mysql.user;";
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+          // Output the data from the query
+          while ($row = $result->fetch_assoc()) {
+              echo "<li>" . $row["Host"] . " / " . $row["User"] . "</li>";
+          }
+      } else {
+          echo "Keine Daten gefunden.";
+      }
+
+      $conn->close();
+      ?>
+
+  - path: /home/ubuntu/Dockerfile
+    content: |
+      FROM php:8.0-apache
+      RUN docker-php-ext-install mysqli
+      COPY /home/ubuntu/info.php /var/www/html/
+      COPY /home/ubuntu/db.php /var/www/html/
+      EXPOSE 80
+
+  - path: /home/ubuntu/docker-compose.yml
+    content: |
+      version: '3.8'
+      networks:
+        m347-network:
+          driver: bridge
+          ipam:
+            config:
+              - subnet: 172.30.0.0/16
+                ip_range: 172.30.5.0/24
+                gateway: 172.30.5.254
+
+      services:
+        db:
+          container_name: m347-kn04a-db
+          image: mariadb:latest
+          restart: always
+          environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: mydatabase
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+          networks:
+            m347-network:
+              ipv4_address: 172.30.5.10
+
+        web:
+          container_name: m347-kn04a-web
+          build: .
+          restart: always
+          ports:
+            - "80:80"
+          networks:
+            m347-network:
+              ipv4_address: 172.30.5.20
+          depends_on:
+            - db
+          environment:
+            DB_HOST: m347-kn04a-db
+            DB_USER: user
+            DB_PASSWORD: password
+            DB_NAME: mydatabase
+
+runcmd:
+  - mkdir -p /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  - systemctl enable docker
+  - systemctl start docker
+  - cd /home/ubuntu
+  - docker compose up -d

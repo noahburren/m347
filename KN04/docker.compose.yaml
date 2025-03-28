@@ -25,7 +25,7 @@ services:
 
   web:
     container_name: m347-kn04a-web
-    image: noahburren07/kn04-web:latest  # Hier dein eigenes Image eintragen
+    image: noahburren07/kn04-web:latest
     restart: always
     ports:
       - "8080:80"
