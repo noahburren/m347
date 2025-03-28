@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  nginx1:
+    image: nginx
+    volumes:
+      - shared-volume:/usr/share/nginx/html  # Named Volume (Long Syntax)
+      - ./bindmount:/mnt/bindmount           # Bind Mount
+    tmpfs:
+      - /tmp                                 # Tmpfs Mount direkt hier angeben
+
+  nginx2:
+    image: nginx
+    volumes:
+      - shared-volume:/usr/share/nginx/html  # Named Volume (Short Syntax)
+
+volumes:
+  shared-volume:
+    driver: local
