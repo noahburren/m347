@@ -3,10 +3,10 @@
 ![get-nodes](A.PNG)
 
 # B) Verständnis für Cluster (50%)
-![get-nodes-2](B1.png)
+![get-nodes-2](B1.PNG)
 
 ## Status
-![status](B2.png)
+![status](B2.PNG)
 
 ### high-availability: yes:
 
@@ -20,22 +20,22 @@ Diese Zeile listet die IP-Adressen der Master-Nodes im Cluster auf, die für die
 Diese Zeile zeigt, dass es keine Standby-Nodes für den Datastore gibt.
 
 ## Remove
-![leave-remove](B3.png)
-![leave-remove](B3(2).png)
+![leave-remove](B3.PNG)
+![leave-remove](B3(2).PNG)
 
 ## Status as Worker
 
-![access](B4.png)
+![access](B4.PNG)
 
 
 Der aktueller Server ist nicht der Master-Node, sondern ein Worker-Node im MicroK8s-Cluster. Deshalb darf man von hier aus keine Cluster-weiten Kommandos wie ``microk8s status`` ausführen.
 
-![get-worker](B5.png)
+![get-worker](B5.PNG)
 
 Der aktueller Server ist nicht der Master-Node, sondern ein Worker-Node im MicroK8s-Cluster. Deshalb darf man von hier aus keine Cluster-weiten Kommandos wie ``kubectl get nodes`` ausführen.
 
 ## Status on Master
 
-![master](B6.png)
+![master](B6.PNG)
 
-![master](B7.png)
+![master](B7.PNG)
