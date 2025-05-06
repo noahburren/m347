@@ -1,6 +1,6 @@
 # A) Installation (50%)
 
-![get-nodes](A.png)
+![get-nodes](A.PNG)
 
 # B) Verständnis für Cluster (50%)
 ![get-nodes-2](B1.png)
